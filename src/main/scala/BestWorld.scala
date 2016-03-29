@@ -51,5 +51,18 @@ object BestWorld {
     treasureMap += (3->"big")
     println(treasureMap)
 
+    def formatArgs(args:Array[String]) = args.mkString("\n")
+    val res = formatArgs(Array("zero","one","two"))
+    assert(res == "zero\none\ntwo") //断言
+    import scala.io.Source
+    val filename = "README.md"
+    for(line <- Source.fromFile(filename).getLines()) //枚举器，循环之后消失
+      println(line.length+" "+line)
+    val lines = Source.fromFile(filename).toList
+    def widthOfLength(s:String) = s.length.toString.length
+    var maxWidth = 0
+    for(line <- lines)
+      maxWidth = maxWidth.max(widthOfLength(line))
   }
+
 }
