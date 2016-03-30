@@ -61,8 +61,27 @@ object BestWorld {
     val lines = Source.fromFile(filename).toList
     def widthOfLength(s:String) = s.length.toString.length
     var maxWidth = 0
-    for(line <- lines)
-      maxWidth = maxWidth.max(widthOfLength(line))
+    for(line <- lines){
+      //maxWidth = maxWidth.max(widthOfLength(line))
+    }
+
+    class ChecksumAccumulator {
+      private var sum=0
+      def add(b:Byte):Unit = {
+        sum += b
+      }
+      def checksum(): Int = {
+        return ~(sum & 0xFF) + 1 // ？？？？？
+      }
+    }
+    val acc = new ChecksumAccumulator
+    val csa = new ChecksumAccumulator //指向的对象不可变，但对象里里面的属性sum是可变的
+
+    def add(b:Byte):Unit = {
+      //b = 1  传进方法里面的参数 都是val类型的，不能进行赋值 方法去掉等号之后 所有的返回值都为 Unit
+    }
+
+
   }
 
 }
