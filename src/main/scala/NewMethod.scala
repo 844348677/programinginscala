@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
 
 object NewMethod {
   def main(args: Array[String]) {
-    val conf = new SparkConf().setAppName("NewMethod").setMaster("spark://10.0.0.151:7077").setJars(List("/home/liuh/workspace/class3/out/artifacts/class3_jar/class3.jar")).set("spark.executor.memory", "12g").set("spark.executor.cores","8")
+    val conf = new SparkConf().setAppName("NewMethod").setMaster("spark://10.0.0.151:7077").setJars(List("/home/liuh/workspace/programinginscala/out/artifacts/programinginscala_jar/programinginscala.jar")).set("spark.executor.memory", "12g").set("spark.executor.cores","8")
     val sc = new SparkContext(conf)
 
     val colmSize :Int =  1566
@@ -220,14 +220,7 @@ object NewMethod {
         loopId += 1
         //println("loopId:"+loopId+" score: "+tuple2._2)
       }
-      def toString(arrayInt:Array[Int]):String = {
-        val sb = new StringBuilder
-        for(intValue <- arrayInt)
-          sb.append(sb).append(",")
-        sb.
-      }
-      //println("没有死循环")
-      new Tuple2(*&**&**&(tuple2._1),tuple2._2)
+        tuple2
     }
     val newTextArray = Array(2,42,56,64,67,68,70,82,102,104,107,113,128,131,134)
     //println(computeIscore(pickRow(newTextArray)))
@@ -253,7 +246,7 @@ object NewMethod {
       println
     }*/
 
-    step3.repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/loop12")
+    //step3.repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/loop12")
 
     //val result3 = step2.collect()
     //for(i <- 1.to(result3.length-1)) {  4,24,96,122,138  4,24,96,138
@@ -268,8 +261,15 @@ object NewMethod {
     //println(computeIscore(pickRow(testArray1)))
     //println(computeIscore(pickRow(testArray2)))
 
-    //val step4 = step3.map(x=>(*&**&**&(x._1),x._2))
-    //step4.repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/loop9")
+    val *&**&**& = (arrayInt:Array[Int])=>{
+      val sb = new StringBuilder
+      for(intValue <- arrayInt)
+        sb.append(intValue).append(",")
+      sb.toString
+    }
+
+    val step4 = step3
+    //step5.repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/loop15")
 
   }
 }

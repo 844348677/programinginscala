@@ -11,7 +11,7 @@ object Test {
 
 
   def main(args: Array[String]) {
-    val conf = new SparkConf().setAppName("NewMethod").setMaster("spark://10.0.0.151:7077").setJars(List("/home/liuh/workspace/class3/out/artifacts/class3_jar/class3.jar"))
+    val conf = new SparkConf().setAppName("TestMethod").setMaster("spark://10.0.0.151:7077").setJars(List("/home/liuh/workspace/programinginscala/out/artifacts/programinginscala_jar/programinginscala.jar")).set("spark.executor.memory", "12g").set("spark.executor.cores","8")
     val sc = new SparkContext(conf)
 
     val colmSize :Int =  1566
@@ -19,7 +19,7 @@ object Test {
 
     val lb = new ListBuffer[String]
 
-    for(i <- 1.to(500000)){
+    for(i <- 1.to(1000000)){
       val randomArray = new Array[Int](16)
       for(i<-1.to(16)){
         val ii = Math.random().*(rowSize-2).toInt+2
@@ -146,7 +146,15 @@ object Test {
           print("  "+result5(i)._2)
           println
         }*/
-    happy.repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/loop500000")
+    val Array2String = (arrayValue:Array[Int])=>{
+      val sb = new StringBuilder
+      for(intValue<-arrayValue)
+        sb.append(intValue).append(",")
+      sb.toString()
+
+    }
+    val sortValue = happy.map(x=>(Array2String(x._1),x._2)).map(x=>(x,1)).reduceByKey(_+_).map(x=>(x._1._2,x._1._1+x._2)).sortByKey(false)
+    sortValue.repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/newResult2")
 
   }
 
