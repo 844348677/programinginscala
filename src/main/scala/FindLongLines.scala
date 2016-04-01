@@ -69,7 +69,36 @@ object FindLongLines {
     //echo(arr)
     echo(arr:_*) //告诉编译器吧arr的每个元素当做参数，而不是当做单一的参数传给echo
 
+/*    def approximate(guess:Double):Double =
+      if(isGoodEnough(guess)) guess
+      else approximate(improve(guess))*/  //递归调用
+/*    def aprroximateLoop(initialGuess:Double):Double={
+      var guess = initialGuess
+      while(!isGoodEnough(guess))
+        guess = improve(guess)
+      guess         //循环
+    }*/
 
+    def boom(x:Int):Int =
+      if(x==0) throw new Exception("boom!")
+      else boom(x-1) + 1
+    def bang(x:Int):Int =
+      if(x==0) throw new Exception("bang!")
+      else bang(x-1)
+    boom(3)
+    bang(5) //-g:notailcalls
+
+    def isEven(x:Int):Boolean =
+      if(x==0) true else isOdd(x-1)
+    def isOdd(x:Int):Boolean =
+      if(x==0) false else isEven(x-1)
+
+    val funValue = nestedFun _
+    def nestedFun(x:Int){
+      if(x!=0){
+        println(x);funValue(x-1)
+      }
+    }
 
   }
   import scala.io.Source
