@@ -38,5 +38,29 @@ object InHome {
     withPrintWriter2(file2){
       writer => writer.println(new Date())
     }
+    var assertionsEnabled = true
+    def myAssert(predicate:()=>Boolean) =
+      if(assertionsEnabled && !predicate())
+        throw new AssertionError
+    myAssert(()=>5>3)
+
+    def byNameAssert(predicate: => Boolean) =
+      if(assertionsEnabled && !predicate)
+          throw  new AssertionError
+    byNameAssert(5>3)
+
+    def boolAssert(predicate:Boolean)=
+      if(assertionsEnabled && !predicate)
+        throw new AssertionError
+    boolAssert(5>3)
+
+    //当断言禁用
+    assertionsEnabled = false
+    //boolAssert 报错 byNameAssert不报错
+    //重要的区别  boolean值为参数  括号内的表达式 优先于boolAssert调用被评估
+    //然而函数表达式  不是先于byNameAssert调用  先创建一个函数值  其apply方法评估 然后传递给byNameAssert
+    boolAssert(2/0 == 0)
+    byNameAssert(2/0 == 0)
+
   }
 }
