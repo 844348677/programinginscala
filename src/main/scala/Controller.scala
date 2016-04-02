@@ -114,8 +114,8 @@ object Controller {
           new URL("http://www.scala-lang.org")
       }
 
-    def f():Int = try(return 1 ) finally(return 2) //返回值为2
-    def g():Int = try(1)finally(2) //返回值为1
+    //def f():Int = try(return 1 ) finally(return 2) //返回值为2
+    //def g():Int = try(1)finally(2) //返回值为1
 
     val firstArg = if(args.length>0) args(0) else " "
     firstArg match{
@@ -126,7 +126,7 @@ object Controller {
     }
     //取消了break和continue 和函数式字面量（口齿）合不好
 
-    var i = 0
+/*    var i = 0
     var foundIt = false
     while(i<args.length && !foundIt){
       if(!args(i).startsWith("-")){
@@ -134,7 +134,7 @@ object Controller {
           foundIt = true
       }
       i = i +1
-    }
+    }*/
 
     def searcheFrom(i:Int):Int =
       if(i >= args.length) -1

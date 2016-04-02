@@ -34,7 +34,7 @@ object FileMatcher {
     second(2)
     val onePlus = curriedSum(1) _
     onePlus(2)
-    val twoPlus = curriedSum(_)(2)
+    //val twoPlus = curriedSum(_)(2)
 
 
 

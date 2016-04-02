@@ -3,9 +3,9 @@
   */
 object FindLongLines {
   def main(args: Array[String]) {
-    val width = args(0).toInt
-    for(arg <- args.drop(1))
-      LongLines.processFile(arg,width)
+//    val width = args(0).toInt
+/*    for(arg <- args.drop(1))
+      LongLines.processFile(arg,width)*/
     //scala FindLongLines 45 LongLines.scala
     //程序应该 被解构成若干小 的函数，每块实现一个定义完备的任务，每块都非常小
 
@@ -93,12 +93,12 @@ object FindLongLines {
     def isOdd(x:Int):Boolean =
       if(x==0) false else isEven(x-1)
 
-    val funValue = nestedFun _
-    def nestedFun(x:Int){
+    //val funValue = nestedFun _
+/*    def nestedFun(x:Int){
       if(x!=0){
         println(x);funValue(x-1)
       }
-    }
+    }*/
 
   }
   import scala.io.Source
