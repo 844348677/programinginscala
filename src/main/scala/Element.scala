@@ -15,10 +15,20 @@ class ArrayElement(conts:Array[String]) extends Element{
   def contents:Array[String] = conts
   //scala 隐式的继承了scala.AnyRef  与 java.lang.Object相同
 }
+class ArrayElement2(conts:Array[String]) extends Element{
+  val contents:Array[String] = conts
+  //scala里面字段和方法属于相同的命名空间
+  //从一个方法变成一个字段，无需修改抽象方法定义
+  //scala中禁止 在用一个类里面使用同样的名称定义字段和方法
+  //java四个命名空间（字段，犯法，类型，包
+  //scala两个明明空间 值（字段，方法，单利对象） 类型（类和特质）
+  //scala吧字段和方法放进统一明明空间理由明确，可以实现使用val重写无参数方法
+}
 
 object test{
   def main(args: Array[String]) {
     val ae = new ArrayElement(Array("hello","world"))
+    //子类型化 是指子类的值可以在任何需要其超累的值得地方使用
     println(ae.width)
   }
 }
