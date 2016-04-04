@@ -24,6 +24,8 @@ class ArrayElement2(conts:Array[String]) extends Element{
   //scala两个明明空间 值（字段，方法，单利对象） 类型（类和特质）
   //scala吧字段和方法放进统一明明空间理由明确，可以实现使用val重写无参数方法
 }
+class ArrayElemet3(val contents:Array[String]) extends Element //单一的参数化字段
+//contents参数的前缀是val，这是同事定义同名参数和字段的一个简写方式
 
 object test{
   def main(args: Array[String]) {
