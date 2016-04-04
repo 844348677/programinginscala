@@ -27,6 +27,14 @@ class ArrayElement2(conts:Array[String]) extends Element{
 class ArrayElemet3(val contents:Array[String]) extends Element //单一的参数化字段
 //contents参数的前缀是val，这是同事定义同名参数和字段的一个简写方式
 
+class LineElement(s:String) extends ArrayElemet3(Array(s)){
+  override def width = s.length
+  override def height = 1
+  //override若子类成员所有重写了父类的具体成员则必须带有这个修饰符
+  //若成员实现的是同名的抽象成员时，则这个修饰符是可选的
+  //若成员并为重写或实现什么其他积累的成员则禁用这个修饰符
+}
+
 object test{
   def main(args: Array[String]) {
     val ae = new ArrayElement(Array("hello","world"))
