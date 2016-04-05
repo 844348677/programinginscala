@@ -1,6 +1,7 @@
 /**
   * Created by liuhang on 2016/4/4.
   */
+/*
 class Cat {
   val dangerous = false
 }
@@ -13,4 +14,4 @@ class Tiger1(
 class Tiger(param1:Boolean,param2:Int) extends Cat{
   override val dangerous = param1
   private var age = param2
-}
+}*/

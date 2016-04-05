@@ -51,7 +51,7 @@ package p{
   //scala中，保护成员只在定义了成员的类的子类中可以被访问到。而java 还允许同一个包的其他类中进行访问
 }
 
-package bobsrockets{
+/*package bobsrockets2{
   package navigation{
     private[bobstrockets] class Navigator{
       protected[navigation] def useStarChart(){}
@@ -67,7 +67,7 @@ package bobsrockets{
       private[launch] val guide = new Navigator
     }
   }
-}
+}*/
 //private[X] 这个类对包含在X包里的所有的类和对象可见
 //protected[X]修饰符允许C的所有子类及修饰符所属的包、类和对象X访问带有次标记的定义
 //更强的约束private[this]仅能在包含了定义的同一个对象中被访问，对象私有，仅在同一个对象中可以访问
