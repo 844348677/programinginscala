@@ -1,5 +1,5 @@
 /**
-  * Created by liuhang on 2016/4/3.
+  * Created by liuhang on 2016/4/3. 本章代码待完善
   */
 abstract class Element {
   def contents : Array[String] //没有实现的方法,是类的抽象成员，具有抽象成员的类，必是抽象类
@@ -28,6 +28,9 @@ abstract class Element {
   override def toString = contents mkString "\n"
   //mkString定义在包括数组在内的所有序列中，
   // "/n" 分隔符字符串 "/n" 被插进 连续元素字符串中间 contents每个数组元素占据一行
+
+
+
 }
 class ArrayElement(conts:Array[String]) extends Element{
   def contents:Array[String] = conts
@@ -80,4 +83,12 @@ object test{
     //子类型化 是指子类的值可以在任何需要其超累的值得地方使用
     println(ae.width)
   }
+}
+object Element{
+  def elem(contents:Array[String]):Element =  //工程方法生产各种类型的类实例
+    new ArrayElement(contents)
+  //def elem(chr:Char,width:Int,height:Int):Elememt =
+    //new UniformElement(chr,width,height)
+  def elem(line:String):Element =
+    new LineElement(line)
 }
