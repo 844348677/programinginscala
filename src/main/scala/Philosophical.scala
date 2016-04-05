@@ -6,10 +6,10 @@ trait Philosophical {
     println("I consume memeory,therefore I am!")
   }
 }
-class Animal
-trait HasLegs
+class Animal2
+trait HasLegs2
 
-class Frog extends Animal with Philosophical with HasLegs{ //混入特质 使用 extends和with
+class Frog extends Animal2 with Philosophical with HasLegs2{ //混入特质 使用 extends和with
   override def toString = "green"
   override def philososphize: Unit ={
     println("It is not esay being "+ toString + "!")
