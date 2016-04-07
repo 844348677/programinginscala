@@ -82,6 +82,9 @@ object Expr{
     }
     for((country,city) <- capitals)
       println("the capital of "+country+" is "+city)
+    val results = List(Some("apple"),None,Some("orange"))
+    for(Some(fruit) <- results)
+      println(fruit)
 
   }
   def simplifyTop(expr:Expr) : Expr = expr match {
