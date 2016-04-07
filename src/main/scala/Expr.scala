@@ -25,6 +25,64 @@ object Expr{
     //UnOp("-",UnOp("-",e)) => e
 
 
+    val capitals = Map("France" -> "Paris","Japan" -> "Tokyo")
+    //capitals get "France" //some(Paris) None对象
+    def show(x:Option[String]) = x match{ //分离可选址
+        case Some(s) => s
+        case None => "?"
+    }
+
+    show(capitals get "Japan")
+    show(capitals get "France")
+    show(capitals get "North Pole")
+    //Option的有点很多，而且会经常用到，
+    //HashMap[Int,Int]不能返回null以表明没有元素
+    //Option[String]类型的变量是可选的String，这比String类型的变量或可能有时是null来说要更为明显
+    //之前描述的因为使用可能为null而没有首先检查是否为null的变量产生的变异错误在scala里变为类型错误。
+    //如果Option[String]类型的，你打算当做String使用，你的Scala程序就不会编译通过
+
+    val myTuple = (123,"abc")
+    val (number,string) = myTuple
+    println(number)
+    println(string)
+
+    val exp = new BinOp("*",Number(5),Number(1))
+    val BinOp(op2,left2,right2) = exp
+
+    val withDefault:Option[Int] => Int = {
+      case Some(x) => x
+      case None => 0
+    }
+    println(withDefault(Some(10)))
+    println(withDefault(None))
+    //下面的额偏函数接受整数列表，返回第二个元素
+    val second: List[Int] => Int ={
+      case x::y::_ => y
+    }
+    //编译器提示 match is not exhaustive
+    //second(List(5,6,7)) second(List())
+    //要检查一个偏函数有定义，告诉编译器你知道正在使用的是偏函数， List[Int] => Int 不仅包含了偏函数，从整数列表到整数的所有函数。
+    //仅包含从整数列表到整数的偏函数，写成PartialFunction[List[Int],Int]
+    val second2:PartialFunction[List[Int],Int] ={
+      case x :: y :: _ => y
+    }
+    second2.isDefinedAt(List(5,6,7))
+    second2.isDefinedAt(List())
+    //偏函数有一个isDefinedAt方法，可以用来测试时候函数对某个特定值有意义，本例函数对至少两个元素的列表有意义
+    //带有PartialFunction的时候
+    //对模式执行两次翻译  一次是真正函数的实现,另一次是测试函数是否对特定参数有意义的实现
+    new PartialFunction[List[Int],Int] {
+      def apply(xs:List[Int]) = xs match {
+        case x::y::_ =>y
+      }
+      override def isDefinedAt(xs:List[Int]) = xs match{
+        case x::y::_ =>true
+        case _ => false
+      }
+    }
+    for((country,city) <- capitals)
+      println("the capital of "+country+" is "+city)
+
   }
   def simplifyTop(expr:Expr) : Expr = expr match {
     case UnOp("-",UnOp("-",e)) => e
@@ -126,8 +184,28 @@ object Expr{
     case UnOp("-",UnOp("-",e)) =>
       simplifyAll(e) // "-" 是自身的反转
     case BinOp("+",e,Number(0)) =>
-      simplifyAll(e) // "0"对于
+      simplifyAll(e) // "0"对于'+'来说不改变结果
+    case BinOp("*",e,Number(1)) =>
+      simplifyAll(e)
+    case UnOp(op,e) =>
+      UnOp(op,simplifyAll(e))
+    case BinOp(op,l,r) =>
+      BinOp(op,simplifyAll(l),simplifyAll(r))
+    case _ => expr
   }
+  /*
+  def simplifyBad(expr:Expr):Expr = expr match{
+    case UnOp(op,e) => UnOp(op,simplifyBad(e))
+    case UnOp("-",UnOp("-",e)) => e
+  }
+   */
+  def describe(e:Expr):String = (e: @unchecked) match{
+    case Number(_) => "a number"
+    case Var(_) => "a variable"
+  }
+
+
+
 }
 //match是scala的表达式，scala的备选项表达式永远不会掉到下一个case，如果没有模式匹配，MatchError异常会被抛出
 
