@@ -196,6 +196,7 @@ object NewMethod {
           val newIndex =indexBuffer.toArray
           val newMatrix = pickRow(newIndex)
 
+          
           val newScore = computeIscore(newMatrix) //重新计算分数
           //println(i+" "+newScore)
           if(newScore >= bestScore){
