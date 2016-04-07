@@ -95,7 +95,7 @@ object Expr{
     s.length
   }
   def isIntIntMap(x:Any) = x match {
-    case m:Map[Int,Int] => true //匹配不到Int，Int
+    //case m:Map[Int,Int] => true //匹配不到Int，Int
     case _ => false
   }
   //泛型擦除，类型参数没有保留到运行期，没办法判断Mpa是两个Int还是其他的，
@@ -121,6 +121,12 @@ object Expr{
     case _ => e
       //case n : Int if 0 < n => ..
       //case s : String if s(0) == 'a' => ..
+  }
+  def simplifyAll(expr:Expr): Expr = expr match {
+    case UnOp("-",UnOp("-",e)) =>
+      simplifyAll(e) // "-" 是自身的反转
+    case BinOp("+",e,Number(0)) =>
+      simplifyAll(e) // "0"对于
   }
 }
 //match是scala的表达式，scala的备选项表达式永远不会掉到下一个case，如果没有模式匹配，MatchError异常会被抛出
