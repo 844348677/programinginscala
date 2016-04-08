@@ -1,3 +1,4 @@
+/*
 /**
   * Created by liuh on 2016/4/5.
   */
@@ -56,9 +57,9 @@ object Expr{
     println(withDefault(Some(10)))
     println(withDefault(None))
     //下面的额偏函数接受整数列表，返回第二个元素
-    val second: List[Int] => Int ={
+/*    val second: List[Int] => Int ={
       case x::y::_ => y
-    }
+    }*/
     //编译器提示 match is not exhaustive
     //second(List(5,6,7)) second(List())
     //要检查一个偏函数有定义，告诉编译器你知道正在使用的是偏函数， List[Int] => Int 不仅包含了偏函数，从整数列表到整数的所有函数。
@@ -212,3 +213,4 @@ object Expr{
 }
 //match是scala的表达式，scala的备选项表达式永远不会掉到下一个case，如果没有模式匹配，MatchError异常会被抛出
 
+*/

@@ -14,12 +14,13 @@ object Test {
     val conf = new SparkConf().setAppName("TestMethod").setMaster("spark://10.0.0.151:7077").setJars(List("/home/liuh/workspace/programinginscala/out/artifacts/programinginscala_jar/programinginscala.jar")).set("spark.executor.memory", "12g").set("spark.executor.cores","8")
     val sc = new SparkContext(conf)
 
+    //行列
     val colmSize :Int =  1566
     val rowSize :Int = 139
 
     val lb = new ListBuffer[String]
 
-    for(i <- 1.to(1000000)){
+    for(i <- 1.to(1000)){
       val randomArray = new Array[Int](16)
       for(i<-1.to(16)){
         val ii = Math.random().*(rowSize-2).toInt+2
@@ -154,7 +155,8 @@ object Test {
 
     }
     val sortValue = happy.map(x=>(Array2String(x._1),x._2)).map(x=>(x,1)).reduceByKey(_+_).map(x=>(x._1._2,x._1._1+x._2)).sortByKey(false)
-    sortValue.repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/newResult2")
+    val esd =sortValue.collect // .repartition(1).saveAsTextFile("hdfs://10.0.0.151:9000/output/newResult2")
+    esd.foreach(println(_))
 
   }
 

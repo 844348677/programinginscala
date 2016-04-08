@@ -122,7 +122,7 @@ object NewMethod {
     }
     //
 
-    //我真是服了！！！！！！！
+
     val step1 = lines.map(_.split(" ")).map(string2int(_)).map(x=>(x,pickRow(x)))//.map(matrix2string(_))转成tuple记录random列index和对应矩阵
     val stepNew = lines.map(_.split(" ")).map(string2int(_))
 
@@ -196,7 +196,7 @@ object NewMethod {
           val newIndex =indexBuffer.toArray
           val newMatrix = pickRow(newIndex)
 
-          
+
           val newScore = computeIscore(newMatrix) //重新计算分数
           //println(i+" "+newScore)
           if(newScore >= bestScore){
