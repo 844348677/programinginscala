@@ -8,7 +8,7 @@ object Ahha {
 
     //val newList3 = List.range(1,4) flatMap (i=>List.range(1,i))
 
-    val bda3 = for(i <- List.range(1,101); j <- List.range(1,i); k <- List.range(1,j)) yield(i,j,k)
+    val bda3 = for(i <- List.range(1,10); j <- List.range(1,i); k <- List.range(1,j)) yield(i,j,k)
     bda3.foreach(println(_))
     println(bda3.size)
   }
