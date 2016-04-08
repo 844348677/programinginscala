@@ -101,6 +101,10 @@ object HelloList {
 
     for(i<-List.range(1,5);j<-List.range(1,i)) yield (i,j)
 
+    List(1,2,3,4,5) filter (_%2==0)
+    words filter (_.length == 3)
+
+
 
 
   }
