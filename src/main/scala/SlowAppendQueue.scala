@@ -9,7 +9,7 @@ class SlowAppendQueue[T](elems:List[T]) {
 
 }
 
-class Queue[T](
+class Queue[T] private(
   private val leading :List[T],
   private val trailing:List[T]){
   private def mirror =
@@ -25,4 +25,7 @@ class Queue[T](
   def append(x:T) =
     new Queue(leading,x::trailing)
 
+}
+object Queue{
+  def apply[T](xs:T*) = new Queue[T](xs.toList,Nil)
 }
