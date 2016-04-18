@@ -36,4 +36,14 @@ object MaxListUpBound {
         if(x > maxRest) x
         else maxRest
     }
+  def maxList[T <% Ordered[T]](elements:List[T]):T =
+    elements match{
+      case List() =>
+        throw new IllegalArgumentException("empty list!")
+      case List(x) => x
+      case x :: rest =>
+        val maxRest = maxList(rest)
+        if(x > maxRest) x
+        else maxRest
+    }
 }
