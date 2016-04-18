@@ -25,4 +25,15 @@ object MaxListUpBound {
       else maxRest
   }
   //def maxListPoorStyle[T](elements:List[T])(implicit ordered:(T,T) => Boolean):T
+
+  def maxList[T](elements: List[T])(implicit ordered:T => Ordered[T]):T=
+    elements match{
+      case List() =>
+        throw new IllegalArgumentException("empty list!")
+      case List(x) => x
+      case x :: rest =>
+        val maxRest = maxList(rest)
+        if(x > maxRest) x
+        else maxRest
+    }
 }
